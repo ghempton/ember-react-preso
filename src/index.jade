@@ -1,0 +1,221 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title Ember-React
+
+    link(rel='stylesheet', type='text/css', href='build/build.css')
+
+  body
+
+    article
+
+      section
+        h1 <a href="http://emberjs.com/" class="ember">Ember</a> + <a href="http://facebook.github.io/react/" class="react">React</a>
+        h2 Made Ridiculously Easy
+        p Gordon Hempton - 11/5 - Ember Seattle
+
+      section
+        h2.bullet Who's this dude?
+        ul
+          li Gordon Hempton
+          li Author of <a href="http://emberscript.com">EmberScript</a> and <a href="http://epf.io">EPF</a>
+          li Works at <a href="http://outreach.io">outreach.io</a>
+          li Been using Ember for a long time
+
+      section
+        img(src='images/gt-router.jpg')
+
+      section
+        h2.bullet What is Ember.js?
+        ul
+          li Models
+          li Views
+          li Controllers
+          li Templates
+          li Components
+          li Helpers
+          li Routes
+        
+      section
+        h2.bullet What is React?
+        ul
+          li Written, used, and open sourced by Facebook
+          li Components
+          li Does some cool things (shadow DOM + diffing)
+      
+      section
+        img(src='images/insanity.jpg')
+        
+      section
+        h2 Two Frameworks? Are you Crazy?
+        // 586k + 82k + 98k + 45k (min)
+        p Ember + Ember-Data + jQuery + Handlebars ~= <strong class="ember">811k (min)</strong>
+        p React ~= <strong class="react">126k (min)</strong>
+        
+      section
+        h2 Why Use React?
+        
+      section
+        h2 Worst framework performance comparison ever:
+        a(href="http://jsfiddle.net/Ut2X6/")
+          img(src="images/perf-screenshot.png")
+        
+      section
+        <blockquote class="twitter-tweet" lang="en"><p>. <a href="https://twitter.com/floydophone">@floydophone</a> Ember.js will be the #1 JS framework for spinning circles</p>&mdash; Erik Bryn (@ebryn) <a href="https://twitter.com/ebryn/status/424250707294699520">January 17, 2014</a></blockquote>
+        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        
+      section
+        h2 <em>Initial Render</em> is Our Bottleneck
+        p Ember is heavily optimized for changes, not the initial render
+        
+      section
+        h1 Our App
+        h2 <a href="http://outreach.io">outreach.io</a>
+        
+      section
+        h2 Perf Optimization Sucks
+        h3.bullet Some solutions:
+        ul
+          li <a href="https://github.com/emberjs/group-helper">{{group}}</a>
+          li <a href="https://github.com/emberjs/list-view">Ember.ListView</a>
+          li <a href="https://github.com/Addepar/ember-table">Ember Table</a>
+          li Custom render() method <em>(what we use)</em>
+        
+      section
+        h3 What we want:
+        ul
+          li Performance optimizations should be few and far between
+          li Still benefit from our framework choice in hot code paths
+          li Reuse as much code as possible
+        
+      section
+        h2 React does a good job at this
+        h3 Re-render everything– anytime you want
+        p Shadow DOM FTW!
+        
+      section
+        h2 Enter Ember-React
+        p Simple set of utilities to make using React inside of Ember easy
+        p Works inside of existing Ember applications
+        
+      section
+        h1 Demo
+        
+      section
+        h2 React components
+        pre
+          code.language-javascript.
+            // file: app/react/time-ago.js
+            /** @jsx React.DOM */
+            export default React.createClass({
+              render: function() {
+                var date = this.props.date;
+                return &lt;time datetime={date}&gt;{moment(date).fromNow()}&lt;/time&gt;;
+              }
+            });
+            
+      section
+        h2 Inside your Ember templates
+        pre
+          code.language-markup.
+            &lt;div&gt;{{react 'time-ago' date=date}}&lt;div&gt;
+
+      section
+        h2 React Routing
+        h3 <a href="https://github.com/rackt/react-router">React Router</a>
+        p Based on Ember.js Router
+        
+      section
+        h2 React Routing
+        pre
+          code.language-javascript.
+            React.createClass({
+              render: function() {
+                return (
+                  &lt;Routes location="history"&gt;
+                    &lt;Route name="profiles" path={rootPath + '/profiles'} handler={ProfilesIndex} /&gt;
+                    &lt;Route name="routing" path={rootPath + '/routing'} handler={Routing} /&gt;
+                  &lt;/Routes&gt;
+                );
+              }
+            });
+            
+      section
+        h2 Inside your Ember Routes
+        pre
+          code.language-javascript.
+            export default Ember.Route.extend({
+              renderTemplate: function() {
+                var rootPath = this.router.generate(this.routeName);
+                this.render({
+                  react: ...
+                });
+              }
+            });
+        
+      section
+        h2.bullet Observations
+        ul
+          li Ember.js is really good at reacting to incremental changes
+          li React is really good at rendering everything
+          li React comes with its own set of opinions (Immutability anyone?)
+          li Ember conventions can be used outside of Ember
+          
+      section
+        h2.bullet When to Use React within an existing Ember app?
+        ul
+          li Performance
+          li Composability
+          li Complex Rendering
+          li Masochism
+          
+      section
+        h2.bullet What about Flux?
+        ul
+          li Flux != React
+          li Unidirectional Data Flow
+          li Antithesis of Ember
+          li Not a fan
+      
+      section
+        img(src="images/components-coming.jpg")
+          
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2 <a href="https://github.com/emberjs/rfcs/pull/15">Ember 2.0</a>
+        img(src="images/holy-grail.jpg")
+        
+      section
+        p From the <a href="https://github.com/emberjs/rfcs/pull/15">Ember 2.0 RFC</a>:
+        blockquote <strong>In Ember 2.0, we will be adopting a "virtual DOM" and data flow model that embraces the best ideas from React and simplifies communication between components.</strong>
+        br
+        blockquote We plan to transition to: when a route is entered, it renders a component, passing along the model as an attr. This eliminates a vestigial use of old-style views, and associates the top-level template with a regular component.
+        
+      section
+        h2 Both Angular 2.0 and Ember 2.0 look <em>a lot</em> like React
+        p Try out some of the goodness <em>today</em> with React-Ember
+        
+      section
+        h2 We are first and foremost Javascript Developers
+        p Important not to feel locked in to any particular framework
+        
+      section
+        h2.bullet Things Ember does way better
+        ul
+          li Object-Model (minus get/set)
+          li Conventions
+          li Ember CLI
+          li Async
+          li Community
+          
+      section
+        h2 See Also
+        ul
+          li <a href="https://docs.google.com/presentation/d/1afMLTCpRxhJpurQ97VBHCZkLbR1TEsRnd3yyxuSQ5YY/edit">React vs. Ember - Alex Matchneer - EmberNYC meetup</a>
+       
+      section
+        h2 Thanks!
+        p <a href="https://twitter.com/ghempton">@ghempton</a>
+
+    script(src='build/build.js')

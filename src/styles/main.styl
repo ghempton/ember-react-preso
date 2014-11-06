@@ -1,0 +1,21 @@
+// New to Stylus? Check out http://learnboost.github.io/stylus
+// Use modern CSS thanks to Autoprefixer: https://github.com/ai/autoprefixer
+
+// Import CSS from "node_modules" and "bower_components"
+// thanks to Stylus' "import css" and "paths" options
+
+@import 'prism/themes/prism-okaidia.css'
+// Check out "bower_components/prism/themes/" for available themes
+
+
+EMBER_ORANGE=#e1563f
+REACT_BLUE=darken(#61dafb, 25%)
+
+.ember
+  color EMBER_ORANGE !important
+  
+.react
+  color REACT_BLUE !important
+  
+blockquote
+  font-style italic
