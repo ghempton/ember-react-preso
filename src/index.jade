@@ -15,6 +15,9 @@ html
         h1 <a href="http://emberjs.com/" class="ember">Ember</a> + <a href="http://facebook.github.io/react/" class="react">React</a>
         h2 Made Ridiculously Easy
         p Gordon Hempton - 11/5 - Ember Seattle
+        
+      section
+        img(src='images/insanity.jpg')
 
       section
         h2.bullet Who's this dude?
@@ -44,9 +47,6 @@ html
           li Written, used, and open sourced by Facebook
           li Components
           li Does some cool things (shadow DOM + diffing)
-      
-      section
-        img(src='images/insanity.jpg')
         
       section
         h2 Two Frameworks? Are you Crazy?
@@ -84,7 +84,7 @@ html
           li Custom render() method <em>(what we use)</em>
         
       section
-        h3 What we want:
+        h3.bullet What we want:
         ul
           li Performance optimizations should be few and far between
           li Still benefit from our framework choice in hot code paths
@@ -161,6 +161,7 @@ html
           li Ember.js is really good at reacting to incremental changes
           li React is really good at rendering everything
           li React comes with its own set of opinions (Immutability anyone?)
+          li React is slightly awkward with complex models
           li Ember conventions can be used outside of Ember
           
       section
