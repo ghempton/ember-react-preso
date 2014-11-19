@@ -7,15 +7,58 @@
 @import 'prism/themes/prism-okaidia.css'
 // Check out "bower_components/prism/themes/" for available themes
 
+.bespoke-scale-parent {
+  perspective: 600px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 
 EMBER_ORANGE=#e1563f
-REACT_BLUE=darken(#61dafb, 25%)
+REACT_BLUE=darken(#61dafb, 35%)
+
+EMBER_ORANGE_LIGHT=lighten(EMBER_ORANGE, 75%)
+REACT_BLUE_LIGHT=lighten(REACT_BLUE, 75%)
+
+a
+  color inherit
+  border-bottom 1px dotted
+
+.bespoke-progress-bar
+  background-color REACT_BLUE
+
 
 .ember
   color EMBER_ORANGE !important
   
 .react
   color REACT_BLUE !important
+  
+.combined-slide
+  section
+    background inherit
+  background linear-gradient(90deg, EMBER_ORANGE_LIGHT, REACT_BLUE_LIGHT)
+  
+.ember-slide
+  background EMBER_ORANGE_LIGHT
+  
+  .bespoke-progress-bar
+    background-color EMBER_ORANGE
+    
+.react-slide
+  background REACT_BLUE_LIGHT
+  
+del
+  position: relative;
+del::after
+  border-bottom: 3px solid red;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
   
 blockquote
   font-style italic
